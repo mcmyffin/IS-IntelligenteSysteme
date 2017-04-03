@@ -1,0 +1,84 @@
+person(albert).
+person(berta).
+person(chris).
+person(detlef).
+person(emma).
+person(felix).
+
+position(vorsitzender).
+position(stellvertreter).
+position(sekretaer).
+
+% is_ueber(X,Y) == X ueber Y
+is_ueber(vorsitzender,stellvertreter).
+is_ueber(vorsitzender,sekretaer).
+is_ueber(stellvertreter,sekretaer).
+
+zur_leitung_gehoeren(X,Y) ← person(X), position(Y).
+
+
+% a)
+¬zur_leitung_gehoeren(albert,X) ← ¬zur_leitung_gehoeren(emma,vorsitzender)
+
+% b)
+¬zur_leitung_gehoeren(berta,X) ← zur_leitung_gehoeren(chris,Y) ∧ is_ueber(X,Y)
+
+% c)
+¬zur_leitung_gehoeren(berta,X) ← zur_leitung_gehoeren(felix,Y) 
+
+% d)
+¬zur_leitung_gehoeren(chris,X) ← zur_leitung_gehoeren(emma,Y) ∧ zur_leitung_gehoeren(felix,Z)
+
+% e)
+¬zur_leitung_gehoeren(chris,X) ← zur_leitung_gehoeren(felix,vorsitzender) ∧ zur_leitung_gehoeren(berta,sekretaer)
+
+% f)
+¬zur_leitung_gehoeren(detlef,X) ← (zur_leitung_gehoeren(chris,Y) ∧ is_ueber(Y,X)) ∨ (zur_leitung_gehoeren(emma,Z) ∧ is_ueber(Z,X))
+% f) 2
+¬zur_leitung_gehoeren(detlef,X) ← (zur_leitung_gehoeren(chris,Y) ∧ is_ueber(Y,X))
+¬zur_leitung_gehoeren(detlef,X) ← (zur_leitung_gehoeren(emma,Y) ∧ is_ueber(Y,X))
+% g)
+¬zur_leitung_gehoeren(emma,stellvertreter)
+
+% h)
+¬zur_leitung_gehoeren(emma,sekretaer) ← zur_leitung_gehoeren(detlef,X)
+
+% i)
+¬zur_leitung_gehoeren(felix,X) → ¬(zur_leitung_gehoeren(emma,Y) ∧ zur_leitung_gehoeren(albert,Z))
+
+% j)
+zur_leitung_gehoeren(felix,X) ← zur_leitung_gehoeren(chris,vorsitzender).
+zur_leitung_gehoeren(felix,vorsitzender).
+
+% KNF
+% a)
+¬zur_leitung_gehoeren(albert,X) ∨ zur_leitung_gehoeren(emma,vorsitzender)
+% b)
+¬zur_leitung_gehoeren(berta,X) ∨ ¬zur_leitung_gehoeren(chris,Y) ∨ ¬is_ueber(X,Y)
+% c)
+¬zur_leitung_gehoeren(berta,X) ∨ ¬zur_leitung_gehoeren(felix,Y)
+% d)
+¬zur_leitung_gehoeren(chris,X) ∨ ¬zur_leitung_gehoeren(emma,Y) ∨ ¬zur_leitung_gehoeren(felix,Z)
+% e)
+¬zur_leitung_gehoeren(chris,X) ∨ ¬zur_leitung_gehoeren(felix,vorsitzender) ∨ ¬zur_leitung_gehoeren(berta,sekretaer)
+% f) **1
+¬zur_leitung_gehoeren(detlef,X) ∨ ((¬zur_leitung_gehoeren(chris,Y) ∨ ¬is_ueber(Y,X)) ∧ (¬zur_leitung_gehoeren(emma,Z) ∨ ¬is_ueber(Z,X)))
+% f) **2
+¬zur_leitung_gehoeren(detlef,X) ∨ ¬zur_leitung_gehoeren(chris,Y) ∨ ¬is_ueber(Y,X)
+¬zur_leitung_gehoeren(detlef,X) ∨ ¬zur_leitung_gehoeren(emma,Y) ∨ ¬is_ueber(Y,X)
+% g)
+¬zur_leitung_gehoeren(emma,stellvertreter)
+% h)
+¬zur_leitung_gehoeren(detlef,X) ∨ ¬zur_leitung_gehoeren(emma,sekretaer)
+% i)
+zur_leitung_gehoeren(felix,X) ∨ ¬zur_leitung_gehoeren(emma,Y) ∨ ¬zur_leitung_gehoeren(albert,Z)
+% j)
+zur_leitung_gehoeren(felix,X) ∨ ¬zur_leitung_gehoeren(chris,vorsitzender).
+zur_leitung_gehoeren(felix,vorsitzender).
+
+
+
+
+
+
+
