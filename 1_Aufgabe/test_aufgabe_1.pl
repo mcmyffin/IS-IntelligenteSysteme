@@ -5,11 +5,11 @@
 
 % Albert will nicht zur Leitung gehören, wenn Emma nicht Vorsitzende wird.
 test(leitung, fail) :- leitung(Leitung),
-              zur_leitung_gehoeren(albert, Leitung),
-              vorsitzender(Vorsitzender, Leitung), Vorsitzender \= emma.
+              vorsitzender(Vorsitzender, Leitung), Vorsitzender \= emma,
+              zur_leitung_gehoeren(albert, Leitung).
 test(leitung, forall) :- leitung(Leitung),
-              nicht_zur_leitung_gehoeren(albert, Leitung);
-              vorsitzender(emma, Leitung).
+              vorsitzender(emma, Leitung);
+              nicht_zur_leitung_gehoeren(albert, Leitung).
 
 
 :- end_tests(aufgabe_1).
