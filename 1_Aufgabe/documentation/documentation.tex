@@ -45,17 +45,18 @@ $
 
 
 \linespace
+\pagebreak
 \textbf{a) } Albert will nicht zur Leitung gehören, wenn Emma nicht Vorsitzende wird.
 $
 \newline
 \eqspa \neg vorsitzender(emma) \to \neg leitung(albert) \newline
 \equiv \neg \neg vorsitzender(emma) \lor \neg leitung(albert) \newline
-\equiv vorsitzender(emma) \lor \neg leitung(albert) \textbf{ (KNF)} \newline
+\equiv vorsitzender(emma) \lor \neg leitung(albert) \newline
 \newline
 \textbf{Negation:} \newline
-\eqspa \neg(vorsitzender(emma) \lor \neg leitung(albert)) \newline
+\eqspa \neg (vorsitzender(emma) \lor \neg leitung(albert)) \newline
 \equiv \neg vorsitzender(emma) \land \neg \neg leitung(albert) \newline
-\equiv \neg vorsitzender(emma) \land leitung(albert) \textbf{ (KNF)} \newline
+\equiv \neg vorsitzender(emma) \land leitung(albert) \newline
 $
 
 
@@ -65,12 +66,12 @@ $
 $
 \newline
 \eqspa stehtueber(berta, chris) \to \neg leitung(berta) \newline
-\equiv \neg stehtueber(berta, chris) \lor \neg leitung(berta) \textbf{ (KNF)} \newline
+\equiv \neg stehtueber(berta, chris) \lor \neg leitung(berta) \newline
 \newline
 \textbf{Negation:} \newline
-\eqspa \neg(\neg stehtueber(berta, chris) \lor \neg leitung(berta)) \newline
+\eqspa \neg (\neg stehtueber(berta, chris) \lor \neg leitung(berta)) \newline
 \equiv \neg \neg stehtueber(berta, chris) \land \neg \neg leitung(berta) \newline
-\equiv stehtueber(berta, chris) \land leitung(berta) \textbf{ (KNF)} \newline
+\equiv stehtueber(berta, chris) \land leitung(berta) \newline
 $
 
 
@@ -79,7 +80,13 @@ $
 \textbf{c) } Berta will unter gar keinen Umständen zusammen mit Felix arbeiten.
 $
 \newline
-\eqspa \neg(leitung(berta) \land leitung(felix)) \newline
+\eqspa \neg (leitung(berta) \land leitung(felix)) \newline
+\equiv \neg leitung(berta) \lor \neg leitung(felix) \newline
+\newline
+\textbf{Negation:} \newline
+\eqspa \neg (\neg leitung(berta) \lor \neg leitung(felix)) \newline
+\equiv \neg \neg leitung(berta) \land \neg \neg leitung(felix) \newline
+\equiv leitung(berta) \land leitung(felix) \newline
 $
 
 
@@ -88,16 +95,31 @@ $
 \textbf{d) } Chris will nicht mitarbeiten, wenn der Leitung Emma und Felix zusammen angehören.
 $
 \newline
-\eqspa leitung(emma) \land leitung(felix) \to \neg(leitung(chris)) \newline
+\eqspa leitung(emma) \land leitung(felix) \to \neg leitung(chris) \newline
+\equiv \neg (leitung(emma) \land leitung(felix)) \lor \neg leitung(chris) \newline
+\equiv \neg leitung(emma) \lor \neg leitung(felix) \lor \neg leitung(chris) \newline
+\newline
+\textbf{Negation:} \newline
+\eqspa \neg (\neg leitung(emma) \lor \neg leitung(felix) \lor \neg leitung(chris)) \newline
+\equiv \neg \neg leitung(emma) \land \neg \neg leitung(felix) \land \neg \neg leitung(chris) \newline
+\equiv leitung(emma) \land leitung(felix) \land leitung(chris) \newline
 $
 
 
 
 \linespace
+\pagebreak
 \textbf{e) } Chris wird nicht mitarbeiten, wenn Felix Vorsitzender oder Berta Sekretär ist.
 $
 \newline
-\eqspa vorsitzender(felix) \land sekretaer(berta) \to \neg(leitung(chris)) \newline
+\eqspa vorsitzender(felix) \land sekretaer(berta) \to \neg leitung(chris) \newline
+\equiv \neg (vorsitzender(felix) \land sekretaer(berta)) \lor \neg leitung(chris) \newline
+\equiv \neg vorsitzender(felix) \lor \neg sekretaer(berta)) \lor \neg leitung(chris) \newline
+\newline
+\textbf{Negation:} \newline
+\eqspa \neg (\neg vorsitzender(felix) \lor \neg sekretaer(berta)) \lor \neg leitung(chris)) \newline
+\equiv \neg \neg vorsitzender(felix) \land \neg \neg sekretaer(berta)) \land \neg \neg leitung(chris) \newline
+\equiv vorsitzender(felix) \land sekretaer(berta)) \land leitung(chris) \newline
 $
 
 
@@ -106,7 +128,17 @@ $
 \textbf{f) } Detlef wird nicht mit Chris oder Emma arbeiten, wenn er dem einen oder anderen unterstellt ist.
 $
 \newline
-\eqspa steht\_ueber(chris, detlef) \lor steht\_ueber(emma, detlef) \to \neg(leitung(detlef)) \newline
+\eqspa stehtueber(chris, detlef) \lor stehtueber(emma, detlef) \to \neg leitung(detlef) \newline
+\equiv \neg (stehtueber(chris, detlef) \lor stehtueber(emma, detlef)) \lor \neg leitung(detlef) \newline
+\equiv (\neg stehtueber(chris, detlef) \land \neg stehtueber(emma, detlef)) \lor \neg leitung(detlef) \newline
+\equiv (\neg stehtueber(chris, detlef) \lor \neg leitung(detlef)) \land (\neg stehtueber(emma, detlef) \lor \neg leitung(detlef)) \newline
+\newline
+\textbf{Negation:} \newline
+\eqspa \neg ((\neg stehtueber(chris, detlef) \lor \neg leitung(detlef)) \land (\neg stehtueber(emma, detlef) \lor \neg leitung(detlef))) \newline
+\equiv \neg (\neg stehtueber(chris, detlef) \lor \neg leitung(detlef)) \lor \neg (\neg stehtueber(emma, detlef) \lor \neg leitung(detlef)) \newline
+\equiv (\neg \neg stehtueber(chris, detlef) \land \neg \neg leitung(detlef)) \lor (\neg \neg stehtueber(emma, detlef) \land \neg \neg leitung(detlef)) \newline
+\equiv (stehtueber(chris, detlef) \land leitung(detlef)) \lor (stehtueber(emma, detlef) \land leitung(detlef)) \newline
+\equiv (stehtueber(chris, detlef) \lor stehtueber(emma, detlef)) \land leitung(detlef) \newline
 $
 
 
@@ -115,7 +147,11 @@ $
 \textbf{g) }  Emma will nicht Stellvertreter sein.
 $
 \newline
-\eqspa \neg(stellvertreter(emma)) \newline
+\eqspa \neg stellvertreter(emma) \newline
+\newline
+\textbf{Negation:} \newline
+\eqspa \neg \neg stellvertreter(emma) \newline
+\equiv stellvertreter(emma) \newline
 $
 
 
@@ -124,7 +160,13 @@ $
 \textbf{h) } Emma will nicht Sekretär sein, wenn Detlef Mitglied der Leitung ist.
 $
 \newline
-\eqspa leitung(detlef) \to \neg(sekretaer(emma)) \newline
+\eqspa leitung(detlef) \to \neg sekretaer(emma) \newline
+\equiv \neg leitung(detlef) \lor \neg sekretaer(emma) \newline
+\newline
+\textbf{Negation:} \newline
+\eqspa \neg (\neg leitung(detlef) \lor \neg sekretaer(emma)) \newline
+\equiv \neg \neg leitung(detlef) \land \neg \neg sekretaer(emma) \newline
+\equiv leitung(detlef) \land sekretaer(emma) \newline
 $
 
 
@@ -133,7 +175,14 @@ $
 \textbf{i) } Emma will nicht zusammen mit Albert arbeiten, wenn Felix nicht der Leitung angehört.
 $
 \newline
-\eqspa \neg(leitung(felix)) \to \neg(zusammenarbeiten(emma, albert)) \newline
+\eqspa \neg leitung(felix) \to \neg (leitung(emma) \land leitung(albert)) \newline
+\equiv \neg \neg leitung(felix) \lor \neg (leitung(emma) \land leitung(albert)) \newline
+\equiv leitung(felix) \lor \neg leitung(emma) \lor \neg leitung(albert) \newline
+\newline
+\textbf{Negation:} \newline
+\eqspa \neg (leitung(felix) \lor \neg leitung(emma) \lor \neg leitung(albert)) \newline
+\equiv \neg leitung(felix) \land \neg \neg leitung(emma) \land \neg \neg leitung(albert) \newline
+\equiv \neg leitung(felix) \land leitung(emma) \land leitung(albert) \newline
 $
 
 
@@ -142,8 +191,16 @@ $
 \textbf{j) } Felix will nur mitarbeiten, wenn er oder Chris Vorsitzender wird.
 $
 \newline
-\eqspa leitung(felix) \leftrightarrow vorsitzender(felix) \lor vorsitzender(chris)
+\eqspa leitung(felix) \to vorsitzender(felix) \lor vorsitzender(chris) \newline
+\equiv \neg leitung(felix) \lor vorsitzender(felix) \lor vorsitzender(chris) \newline
+\newline
+\textbf{Negation:} \newline
+\eqspa \neg (\neg leitung(felix) \lor vorsitzender(felix) \lor vorsitzender(chris)) \newline
+\equiv \neg \neg leitung(felix) \land \neg vorsitzender(felix) \land \neg vorsitzender(chris) \newline
+\equiv leitung(felix) \land \neg vorsitzender(felix) \land \neg vorsitzender(chris) \newline
 $
+
+
 
 \end{flushleft}
 
