@@ -15,6 +15,7 @@
 
 \newcommand{\tabspace}{\phantom{} \hspace{25pt}}
 \newcommand{\linespace}{\phantom{} \vspace{10pt}}
+\newcommand{\linespacesmall}{\phantom{} \vspace{5pt}}
 \newcommand{\eqspa}{\phantom{} \hspace{10pt}}
 
 
@@ -23,21 +24,41 @@
 
 \begin{flushleft}
 
+
+\textbf{Darstellung der Personen} \newline
+Wir verfolgen in unserem Ansatz eine Zuweisung von Personen auf die drei möglichen Positionen.
+Damit sind die einzelnen Positionen Variablen dar, welche Werte aus der Menge der Personen enthalten.
+Anders ausgedrückt ist die Menge der Personen $Personen$ die Domäne für genau diese Variablen: \newline
 $
-\newline
-Personen = \{ albert, berta, chris, detlef, emma, felix \}
+Personen = \{ albert, berta, chris, detlef, emma, felix \} \newline
 $
 
+
+
+\linespace
+\textbf{Darstellung der Positionen} \newline
+Zur Darstellung der Positionen definieren wir folgende Prädikate: \newline
+$vorsitzender(X)$: X ist Vorsitzender \newline
+$stellvertreter(X)$: X ist Stellvertreter \newline
+$sekretaer(X)$: X ist Sekretär
+
+\linespacesmall
+Zur Darstellung der Zugehörigkeit einer Person $X$ zur Leitung definieren wir das Prädikat $leitung(X)$: \newline
 $
-\newline
 \forall X \in Personen: 
      vorsitzender(X) \lor
      stellvertreter(X) \lor 
-    sekretaer(X) 
-     \to leitung(X) \newline
+     sekretaer(X) 
+     \to leitung(X)
+$
+
+\linespacesmall
+Zur Darstellung dass eine Person $X$ über einer Person $Y$ steht definieren wird das Prädikat $stehtueber(X, Y)$: \newline
+$
 \forall X, Y \in Personen: 
-     (leitung(X) \land \neg leitung(Y)) \lor 
-     (vorsitzender(X) \land stellvertreter(Y)) \lor \newline
+     (leitung(X) \land \neg leitung(Y)) \lor \newline
+     \tabspace (vorsitzender(X) \land stellvertreter(Y)) \lor \newline
+     \tabspace (vorsitzender(X) \land sekretaer(Y)) \lor \newline
      \tabspace (stellvertreter(X) \land sekretaer(Y)) 
      \to stehtueber(X, Y) \newline
 $
@@ -45,18 +66,25 @@ $
 
 
 \linespace
+\textbf{Darstellung der einschränkenden Regeln} \newline
+Im Folgenden stellen wir die einschränkenden Regeln dar. \newline
+Zur Umsetzung der Regeln in Prolog formen wir diese zuerst in die konjunktive Normalform (KNF) um. Dazu nutzen wir die Definition der Implikation und die Umformungsregeln für Doppelnegation, Distributivgesetz und DeMorgan. \newline
+Zum späteren Testen der Regeln nutzen wir einerseits für positive Tests genau diese KNF. Anderseits nutzen wir eine Negation der Regel (welche wir ebenfalls in eine KNF umformen), um auch negative Tests durchzuführen. \newline
+
+
+
 \pagebreak
 \textbf{a) } Albert will nicht zur Leitung gehören, wenn Emma nicht Vorsitzende wird.
 $
 \newline
 \eqspa \neg vorsitzender(emma) \to \neg leitung(albert) \newline
 \equiv \neg \neg vorsitzender(emma) \lor \neg leitung(albert) \newline
-\equiv vorsitzender(emma) \lor \neg leitung(albert) \newline
+\equiv vorsitzender(emma) \lor \neg leitung(albert) \textbf{ (KNF)} \newline
 \newline
 \textbf{Negation:} \newline
 \eqspa \neg (vorsitzender(emma) \lor \neg leitung(albert)) \newline
 \equiv \neg vorsitzender(emma) \land \neg \neg leitung(albert) \newline
-\equiv \neg vorsitzender(emma) \land leitung(albert) \newline
+\equiv \neg vorsitzender(emma) \land leitung(albert) \textbf{ (KNF)} \newline
 $
 
 
@@ -66,12 +94,12 @@ $
 $
 \newline
 \eqspa stehtueber(berta, chris) \to \neg leitung(berta) \newline
-\equiv \neg stehtueber(berta, chris) \lor \neg leitung(berta) \newline
+\equiv \neg stehtueber(berta, chris) \lor \neg leitung(berta) \textbf{ (KNF)} \newline
 \newline
 \textbf{Negation:} \newline
 \eqspa \neg (\neg stehtueber(berta, chris) \lor \neg leitung(berta)) \newline
 \equiv \neg \neg stehtueber(berta, chris) \land \neg \neg leitung(berta) \newline
-\equiv stehtueber(berta, chris) \land leitung(berta) \newline
+\equiv stehtueber(berta, chris) \land leitung(berta) \textbf{ (KNF)} \newline
 $
 
 
@@ -81,12 +109,12 @@ $
 $
 \newline
 \eqspa \neg (leitung(berta) \land leitung(felix)) \newline
-\equiv \neg leitung(berta) \lor \neg leitung(felix) \newline
+\equiv \neg leitung(berta) \lor \neg leitung(felix) \textbf{ (KNF)} \newline
 \newline
 \textbf{Negation:} \newline
 \eqspa \neg (\neg leitung(berta) \lor \neg leitung(felix)) \newline
 \equiv \neg \neg leitung(berta) \land \neg \neg leitung(felix) \newline
-\equiv leitung(berta) \land leitung(felix) \newline
+\equiv leitung(berta) \land leitung(felix) \textbf{ (KNF)} \newline
 $
 
 
@@ -97,29 +125,28 @@ $
 \newline
 \eqspa leitung(emma) \land leitung(felix) \to \neg leitung(chris) \newline
 \equiv \neg (leitung(emma) \land leitung(felix)) \lor \neg leitung(chris) \newline
-\equiv \neg leitung(emma) \lor \neg leitung(felix) \lor \neg leitung(chris) \newline
+\equiv \neg leitung(emma) \lor \neg leitung(felix) \lor \neg leitung(chris) \textbf{ (KNF)} \newline
 \newline
 \textbf{Negation:} \newline
 \eqspa \neg (\neg leitung(emma) \lor \neg leitung(felix) \lor \neg leitung(chris)) \newline
 \equiv \neg \neg leitung(emma) \land \neg \neg leitung(felix) \land \neg \neg leitung(chris) \newline
-\equiv leitung(emma) \land leitung(felix) \land leitung(chris) \newline
+\equiv leitung(emma) \land leitung(felix) \land leitung(chris) \textbf{ (KNF)} \newline
 $
 
 
 
-\linespace
 \pagebreak
 \textbf{e) } Chris wird nicht mitarbeiten, wenn Felix Vorsitzender oder Berta Sekretär ist.
 $
 \newline
 \eqspa vorsitzender(felix) \land sekretaer(berta) \to \neg leitung(chris) \newline
 \equiv \neg (vorsitzender(felix) \land sekretaer(berta)) \lor \neg leitung(chris) \newline
-\equiv \neg vorsitzender(felix) \lor \neg sekretaer(berta) \lor \neg leitung(chris) \newline
+\equiv \neg vorsitzender(felix) \lor \neg sekretaer(berta) \lor \neg leitung(chris) \textbf{ (KNF)} \newline
 \newline
 \textbf{Negation:} \newline
 \eqspa \neg (\neg vorsitzender(felix) \lor \neg sekretaer(berta) \lor \neg leitung(chris)) \newline
 \equiv \neg \neg vorsitzender(felix) \land \neg \neg sekretaer(berta) \land \neg \neg leitung(chris) \newline
-\equiv vorsitzender(felix) \land sekretaer(berta) \land leitung(chris) \newline
+\equiv vorsitzender(felix) \land sekretaer(berta) \land leitung(chris) \textbf{ (KNF)} \newline
 $
 
 
@@ -131,14 +158,14 @@ $
 \eqspa stehtueber(chris, detlef) \lor stehtueber(emma, detlef) \to \neg leitung(detlef) \newline
 \equiv \neg (stehtueber(chris, detlef) \lor stehtueber(emma, detlef)) \lor \neg leitung(detlef) \newline
 \equiv (\neg stehtueber(chris, detlef) \land \neg stehtueber(emma, detlef)) \lor \neg leitung(detlef) \newline
-\equiv (\neg stehtueber(chris, detlef) \lor \neg leitung(detlef)) \land (\neg stehtueber(emma, detlef) \lor \neg leitung(detlef)) \newline
+\equiv (\neg stehtueber(chris, detlef) \lor \neg leitung(detlef)) \land (\neg stehtueber(emma, detlef) \lor \neg leitung(detlef)) \textbf{ (KNF)} \newline
 \newline
 \textbf{Negation:} \newline
 \eqspa \neg ((\neg stehtueber(chris, detlef) \lor \neg leitung(detlef)) \land (\neg stehtueber(emma, detlef) \lor \neg leitung(detlef))) \newline
 \equiv \neg (\neg stehtueber(chris, detlef) \lor \neg leitung(detlef)) \lor \neg (\neg stehtueber(emma, detlef) \lor \neg leitung(detlef)) \newline
 \equiv (\neg \neg stehtueber(chris, detlef) \land \neg \neg leitung(detlef)) \lor (\neg \neg stehtueber(emma, detlef) \land \neg \neg leitung(detlef)) \newline
 \equiv (stehtueber(chris, detlef) \land leitung(detlef)) \lor (stehtueber(emma, detlef) \land leitung(detlef)) \newline
-\equiv (stehtueber(chris, detlef) \lor stehtueber(emma, detlef)) \land leitung(detlef) \newline
+\equiv (stehtueber(chris, detlef) \lor stehtueber(emma, detlef)) \land leitung(detlef) \textbf{ (KNF)} \newline
 $
 
 
@@ -147,11 +174,11 @@ $
 \textbf{g) }  Emma will nicht Stellvertreter sein.
 $
 \newline
-\eqspa \neg stellvertreter(emma) \newline
+\eqspa \neg stellvertreter(emma) \textbf{ (KNF)} \newline
 \newline
 \textbf{Negation:} \newline
 \eqspa \neg \neg stellvertreter(emma) \newline
-\equiv stellvertreter(emma) \newline
+\equiv stellvertreter(emma) \textbf{ (KNF)} \newline
 $
 
 
@@ -161,12 +188,12 @@ $
 $
 \newline
 \eqspa leitung(detlef) \to \neg sekretaer(emma) \newline
-\equiv \neg leitung(detlef) \lor \neg sekretaer(emma) \newline
+\equiv \neg leitung(detlef) \lor \neg sekretaer(emma) \textbf{ (KNF)} \newline
 \newline
 \textbf{Negation:} \newline
 \eqspa \neg (\neg leitung(detlef) \lor \neg sekretaer(emma)) \newline
 \equiv \neg \neg leitung(detlef) \land \neg \neg sekretaer(emma) \newline
-\equiv leitung(detlef) \land sekretaer(emma) \newline
+\equiv leitung(detlef) \land sekretaer(emma) \textbf{ (KNF)} \newline
 $
 
 
@@ -177,12 +204,12 @@ $
 \newline
 \eqspa \neg leitung(felix) \to \neg (leitung(emma) \land leitung(albert)) \newline
 \equiv \neg \neg leitung(felix) \lor \neg (leitung(emma) \land leitung(albert)) \newline
-\equiv leitung(felix) \lor \neg leitung(emma) \lor \neg leitung(albert) \newline
+\equiv leitung(felix) \lor \neg leitung(emma) \lor \neg leitung(albert) \textbf{ (KNF)} \newline
 \newline
 \textbf{Negation:} \newline
 \eqspa \neg (leitung(felix) \lor \neg leitung(emma) \lor \neg leitung(albert)) \newline
 \equiv \neg leitung(felix) \land \neg \neg leitung(emma) \land \neg \neg leitung(albert) \newline
-\equiv \neg leitung(felix) \land leitung(emma) \land leitung(albert) \newline
+\equiv \neg leitung(felix) \land leitung(emma) \land leitung(albert) \textbf{ (KNF)} \newline
 $
 
 
@@ -192,12 +219,12 @@ $
 $
 \newline
 \eqspa leitung(felix) \to vorsitzender(felix) \lor vorsitzender(chris) \newline
-\equiv \neg leitung(felix) \lor vorsitzender(felix) \lor vorsitzender(chris) \newline
+\equiv \neg leitung(felix) \lor vorsitzender(felix) \lor vorsitzender(chris) \textbf{ (KNF)} \newline
 \newline
 \textbf{Negation:} \newline
 \eqspa \neg (\neg leitung(felix) \lor vorsitzender(felix) \lor vorsitzender(chris)) \newline
 \equiv \neg \neg leitung(felix) \land \neg vorsitzender(felix) \land \neg vorsitzender(chris) \newline
-\equiv leitung(felix) \land \neg vorsitzender(felix) \land \neg vorsitzender(chris) \newline
+\equiv leitung(felix) \land \neg vorsitzender(felix) \land \neg vorsitzender(chris) \textbf{ (KNF)} \newline
 $
 
 
