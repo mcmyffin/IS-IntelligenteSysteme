@@ -24,6 +24,7 @@ sudoku(2, [
 ]).
 
 
+
 % http://www.swi-prolog.org/pldoc/man?predicate=transpose/2
 sudoku(3, [
      [_,_,_,_,_,_,_,_,_],
@@ -48,6 +49,8 @@ sudoku(4, [
      [4,7,2,3,1,9,5,6,8],
      [8,6,3,7,4,5,2,1,9]
 ]).
+
+
 
 % empty sudoku field
 sudoku(5, [
