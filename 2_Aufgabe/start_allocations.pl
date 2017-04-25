@@ -53,7 +53,7 @@ sudoku(4, [
 
 
 % empty sudoku field
-sudoku(5, [
+sudoku(empty, [
      [_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_],
