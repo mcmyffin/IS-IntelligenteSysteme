@@ -10,9 +10,8 @@ sol5_solveSudoku(Sudoku) :-
      time(sol5_checkCols(Sudoku)),
      time(sol5_checkBlocks(Sudoku)).
 
-sol5_checkLength(Sudoku) :- length(Sudoku, 9), sol5_checkLengthInner(Sudoku).
-sol5_checkLengthInner([]).
-sol5_checkLengthInner([Row|Rest]) :- length(Row, 9), sol5_checkLengthInner(Rest).
+sol5_checkLength(Sudoku) :- length(Sudoku, 9), maplist(sol5_checkLengthInner, Sudoku).
+sol5_checkLengthInner(Row) :- length(Row, 9).
 
 sol5_checkDomain(Sudoku) :-
      append(Sudoku, SudokuFlatted),

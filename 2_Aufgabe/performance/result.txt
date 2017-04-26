@@ -1,0 +1,32 @@
+solution0
+% 537,605 inferences, 0.094 CPU in 0.294 seconds (32% CPU, 5734453 Lips)
+
+solution1
+% 537,605 inferences, 0.078 CPU in 0.219 seconds (36% CPU, 6881344 Lips)
+
+solution2
+% 537,885 inferences, 0.078 CPU in 0.217 seconds (36% CPU, 6884928 Lips)
+
+solution3
+% 1 inferences, 0.000 CPU in 0.000 seconds (?% CPU, Infinite Lips)
+% 3,906 inferences, 0.000 CPU in 0.001 seconds (0% CPU, Infinite Lips)
+% 42,625 inferences, 0.000 CPU in 0.008 seconds (0% CPU, Infinite Lips)
+% 214,417 inferences, 0.031 CPU in 0.034 seconds (92% CPU, 6861344 Lips)
+% 276,653 inferences, 0.047 CPU in 0.045 seconds (104% CPU, 5901931 Lips)
+% 10 inferences, 0.000 CPU in 0.238 seconds (0% CPU, Infinite Lips)
+
+solution4
+% 41 inferences, 0.000 CPU in 0.000 seconds (?% CPU, Infinite Lips)
+% 4,010 inferences, 0.000 CPU in 0.001 seconds (0% CPU, Infinite Lips)
+% 42,634 inferences, 0.016 CPU in 0.008 seconds (195% CPU, 2728576 Lips)
+% 214,650 inferences, 0.031 CPU in 0.034 seconds (92% CPU, 6868800 Lips)
+% 276,663 inferences, 0.047 CPU in 0.044 seconds (106% CPU, 5902144 Lips)
+% 19 inferences, 0.000 CPU in 0.171 seconds (0% CPU, Infinite Lips)
+
+solution5
+% 50 inferences, 0.000 CPU in 0.000 seconds (?% CPU, Infinite Lips)
+% 4,010 inferences, 0.000 CPU in 0.001 seconds (0% CPU, Infinite Lips)
+% 42,635 inferences, 0.000 CPU in 0.008 seconds (0% CPU, Infinite Lips)
+% 214,651 inferences, 0.031 CPU in 0.038 seconds (82% CPU, 6868832 Lips)
+% 276,663 inferences, 0.047 CPU in 0.049 seconds (96% CPU, 5902144 Lips)
+% 20 inferences, 0.000 CPU in 0.265 seconds (0% CPU, Infinite Lips)

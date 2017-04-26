@@ -12,7 +12,7 @@ solution(Solution) :-
      string_concat("writeln(solution", Solution, A),
      string_concat(A, "), sol", B),
      string_concat(B, Solution, C),
-     string_concat(C, "_sudoku(1)", D),
+     string_concat(C, "_sudoku(sudoku_1)", D),
      term_to_atom(E, D),
      E, nl.
 
