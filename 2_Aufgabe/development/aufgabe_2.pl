@@ -18,7 +18,8 @@ checkDomain(Sudoku) :-
      append(Sudoku, SudokuFlatted),
      SudokuFlatted ins 1..9.
 
-checkRows(Sudoku) :- maplist(all_distinct, Sudoku).
+checkRows([]).
+checkRows([Row|Rest]) :- all_distinct(Row), checkRows(Rest).
 
 checkCols(Sudoku) :-
      transpose(Sudoku, SudokuTransposed),
@@ -47,4 +48,5 @@ checkBlocks(Sudoku) :-
            [R7C7, R7C8, R7C9, R8C7, R8C8, R8C9, R9C7, R9C8, R9C9]],
      checkRows(SudokuBlock).
 
-printSudoku(Sudoku) :- maplist(writeln, Sudoku).
+printSudoku([]).
+printSudoku([Row|Rest]) :- writeln(Row), printSudoku(Rest).
