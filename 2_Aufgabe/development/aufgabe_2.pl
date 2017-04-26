@@ -10,8 +10,9 @@ solveSudoku(Sudoku) :-
      checkCols(Sudoku),
      checkBlocks(Sudoku).
 
-checkLength(Sudoku) :- length(Sudoku, 9), maplist(checkLengthInner, Sudoku).
-checkLengthInner(Row) :- length(Row, 9).
+checkLength(Sudoku) :- length(Sudoku, 9), checkLengthInner(Sudoku).
+checkLengthInner([]).
+checkLengthInner([Row|Rest]) :- length(Row, 9), checkLengthInner(Rest).
 
 checkDomain(Sudoku) :-
      append(Sudoku, SudokuFlatted),
