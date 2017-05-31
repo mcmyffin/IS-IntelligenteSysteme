@@ -1,3 +1,14 @@
+# Prolog
 *.BAK
+
+# Python
+*.pyc
+
+# Exercise 1
 /1_Aufgabe/documentation_temp
+
+# Exercise 2
 /2_Aufgabe/documentation_temp
+
+# Exercise 3
+/3_Aufgabe/temp.py
