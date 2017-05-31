@@ -10,7 +10,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-
+from helper import add_bias, calcWeightsClosedForm, calcPrediction
 
 class LinearRegression(object):
     """Linear Regression Model
@@ -33,12 +33,13 @@ class LinearRegression(object):
         if len(np.shape(X)) < 2:
             X = np.reshape(X, (np.shape(X)[0], 1))
 
-        # TODO: X um Bias-Term ergänzen
+        # X um Bias-Term ergänzen
         # damit sollte X die Form [n_samples, n_features + 1] bekommen
+        X = add_bias(X)
 
-        # TODO: Bestimmung der Gewichte mittels abgeschlossener Lösung
+        # Bestimmung der Gewichte mittels abgeschlossener Lösung
         # self.weights in der Form [n_features + 1]
-        self.weights = …
+        self.weights = calcWeightsClosedForm(X, y)
 
         return self
 
@@ -50,6 +51,9 @@ class LinearRegression(object):
         Returns:
           Array der vorhergesagten Zielvariablen in der Form [n_samples]
         """
-        # TODO: Berechnen der Zielvariablen über die Hypothese
-        # folgende Zeile löschen
-        raise NotImplementedError("Noch nicht implementiert!")
+        # X um Bias-Term ergänzen
+        # damit sollte X die Form [n_samples, n_features + 1] bekommen
+        X = add_bias(X)
+        
+        # Berechnen der Zielvariablen über die Hypothese
+        return calcPrediction(self.weights, X)

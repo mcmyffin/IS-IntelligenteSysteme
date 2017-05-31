@@ -32,17 +32,18 @@ plt.ylabel("Price in $USD$")
 plt.show()
 
 
-# TODO: Standartisierung der Daten
-df_norm = …
+# Standartisierung der Daten
+df_norm = np.array(df)
 
-# TODO: Trainingsdaten und Zielvariablen definieren
-X = …
-y = …
+# Trainingsdaten und Zielvariablen definieren
+X = np.delete(df_norm, 2, axis = 1)
+y = df_norm[:, 2]
 
-# TODO: Training des Modells
-from … import …
+from linear_regression_sgd import LinearRegression
 
-model = …
+# Training des Modells
+model = LinearRegression()
+model = model.fit(X,y, alpha=0.01, iterations=100)
 
 
 # Plot der Error-Kurve über das Training
