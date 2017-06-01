@@ -109,4 +109,4 @@ class LogisticRegression(object):
         X = add_bias(X)
         
         # Berechnen der Zielvariablen über die Hypothese
-        return calcPrediction(self.weights, X)
+        return h_x(self.weights, X)
