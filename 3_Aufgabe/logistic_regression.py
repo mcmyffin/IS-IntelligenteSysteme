@@ -10,6 +10,34 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
+from helper import add_bias, calcWeightsClosedForm, calcPrediction, multiply, transpose
+
+# Sigmoid Funktion
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+# Hypothese h(x)
+def h_x(w, X):
+    return sigmoid(multiply(X, transpose(w)))
+    
+# Cost Funktion
+def cost_fn(w, X, y):
+    _lambda = 10
+    m, n = np.shape(X)
+    
+    l = 0
+    for i in range(1, m):
+        term1 = y[i] * np.log(h_x(w, X[i]))
+        term2 = (1 - y[i]) * np.log(1 - h_x(w, X[i]))
+        l += (term1 + term2)
+    
+    result = 0
+    for j in range(1, n):
+        result += (w[j] ** 2)
+    result = (_lambda / 2) * result
+
+    result += l
+    return result
 
 class LogisticRegression(object):
     """Logistic Regression Model
@@ -41,43 +69,27 @@ class LogisticRegression(object):
         # m Samples mit n Attributen (exclusive Bias)
         m, n = np.shape(X)
 
-        # TODO: X um Bias-Term ergänzen
+        # X um Bias-Term ergänzen
         # damit sollte X die Form [n_samples, n_features + 1] bekommen
+        X = add_bias(X)
 
-        # TODO: Initialisierung der Gewichte (inklusive Bias-Term)
+        # Initialisierung der Gewichte (inklusive Bias-Term)
         # self.weights in der Form [n_features + 1]
-        self.weights = …
+        self.weights = calcWeightsClosedForm(X, y)
 
         # Array zum Speichern des Errors für jeden SGD-Schritt
         self.cost = []
-
-        # append attribute x_0 to training samples
-        x_0 = np.ones((m,1))
-        X = np.concatenate([x_0, X], axis=1)
-
-        # without numpy
-        # x_0 = [[1.0] for _ in range(len(X))]
-        # X = [foo + bar for foo, bar in zip(x_0, X)]
-
-        # TODO: Sigmoid Funktion
-        sigmoid = lambda x: …
-        # alternativ als Funktion: def sigmoid(x): …
-
-        # TODO: Hypothese h(x)
-        h_x = lambda w, X: …
-        # alternativ als Funktion: def h_x(w,X): …
-
-        # TODO: Cost Funktion
-        cost_fn = lambda w, X, y: …
-        # alternativ als Funktion: def cost(w,X,y): …
 
         # SGD Schleife über Iterationen
         for _ in range(iterations):
             # Schleife über Datensätze
             for i in range(m):
 
-                # TODO: Update der Gewichte
-                self.weights = …
+                # Update der Gewichte
+                # Schleife über Parameter (n+1 durch Bias-Term)
+                for j in range(n+1):
+                    temp = y[i] - h_x(self.weights, X[i])
+                    self.weights[j] = self.weights[j] + alpha * temp * X[i][j]
 
             # Berechne SSE des SGD-Schritts mit den aktuallisierten Gewichten
             self.cost = self.cost + [cost_fn(self.weights, X, y)]
@@ -92,6 +104,9 @@ class LogisticRegression(object):
         Returns:
           Array der vorhergesagten Zielvariablen in der Form [n_samples]
         """
-        # TODO: Berechnen der Zielvariablen über die Hypothese
-        # folgende Zeile löschen
-        raise NotImplementedError("Noch nicht implementiert!")
+        # X um Bias-Term ergänzen
+        # damit sollte X die Form [n_samples, n_features + 1] bekommen
+        X = add_bias(X)
+        
+        # Berechnen der Zielvariablen über die Hypothese
+        return calcPrediction(self.weights, X)

@@ -17,8 +17,8 @@ def get_dimensions(M):
     return np.shape(M)
 
 def add_bias(M):
-    # np.insert(input, index, value, axis)
-    return np.insert(M, 0, 1, horizontal_axis)
+    m, n = np.shape(M)
+    return np.concatenate([np.ones((m,1)), M], axis = horizontal_axis)
 
 def multiply(M1, M2):
     return np.dot(M1, M2)
