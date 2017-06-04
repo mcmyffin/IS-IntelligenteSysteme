@@ -20,7 +20,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Laden des Datensatzes als Pandas DataFrame
-df = pd.read_csv("./data/immo.txt", sep=",")
+df = pd.read_csv("./data/immo.txt", sep=",", dtype="float64")
 
 # Plot der Daten
 sc = plt.scatter(df["size"], df["price"], c=df["rooms"], cmap="Reds")
@@ -33,15 +33,21 @@ plt.show()
 
 
 # Standartisierung der Daten
+df_norm = np.copy(df)
+
+from helper import standardize, horizontal_axis
+standardize(df["size"])
+standardize(df["rooms"])
+standardize(df["price"])
+
 df_norm = np.array(df)
 
 # Trainingsdaten und Zielvariablen definieren
-X = np.delete(df_norm, 2, axis = 1)
-y = df_norm[:, 2]
-
-from linear_regression_sgd import LinearRegression
+y = df_norm[:,2]
+X = np.delete(df_norm, 2, axis = horizontal_axis)
 
 # Training des Modells
+from linear_regression_sgd import LinearRegression
 model = LinearRegression()
 model = model.fit(X,y, alpha=0.01, iterations=100)
 

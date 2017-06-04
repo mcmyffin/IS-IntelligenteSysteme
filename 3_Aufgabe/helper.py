@@ -41,3 +41,10 @@ def calcPrediction(theta, X):
     thetaT = transpose(theta)
     result = multiply(X, thetaT)
     return result
+
+def standardize(data):
+    average = np.average(data)
+    standard_diviation = np.std(data)
+    
+    for x in range(len(data)):
+        data[x] = np.abs(data[x] - average) / standard_diviation
