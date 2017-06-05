@@ -10,7 +10,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-from helper import add_bias, calcWeightsClosedForm, calcPrediction
+from helper import *
 
 class LinearRegression(object):
     """Linear Regression Model
@@ -34,13 +34,14 @@ class LinearRegression(object):
             X = np.reshape(X, (np.shape(X)[0], 1))
 
         # X um Bias-Term ergänzen
-        # damit sollte X die Form [n_samples, n_features + 1] bekommen
+        # damit sollte X die Form [n_samples, n_features + 1] bekommen   
         X = add_bias(X)
-
+        
+        
         # Bestimmung der Gewichte mittels abgeschlossener Lösung
         # self.weights in der Form [n_features + 1]
         self.weights = calcWeightsClosedForm(X, y)
-
+        
         return self
 
     def predict(self, X):

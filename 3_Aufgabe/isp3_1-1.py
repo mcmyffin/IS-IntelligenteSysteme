@@ -16,6 +16,7 @@ from __future__ import print_function
 
 import numpy as np
 import matplotlib.pyplot as plt
+from helper import *
 
 # Dummy Datensatz mit m=10 Samples und n=1 Attribute
 X = [[0.86], [0.09], [-0.85], [0.87], [-0.44], [-0.43], [-1.10], [0.40], [-0.96], [0.17]]

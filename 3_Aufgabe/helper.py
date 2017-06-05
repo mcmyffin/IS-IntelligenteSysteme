@@ -10,15 +10,50 @@ import numpy as np
 vertical_axis = 0
 horizontal_axis = 1
 
+def latex_column(name, x, column):
+    x = to_array(x)
+    x = x[:, column]
+    latex_matrix(name, x)
+
+def latex_matrix(name, x):
+    x = to_array(x)
+    dimensions = get_dimensions(x)
+    m = dimensions[0]
+    try:
+        n = dimensions[1]
+    except IndexError:
+        n = -1
+    
+    print(name + " = \\begin{pmatrix}")
+    for i in range(m):
+        temp = ""
+        
+        if n == -1:
+            temp = temp + str(x[i])
+        else:
+            for j in range(n):
+                if j == (n - 1):
+                    temp = temp + str(x[i][j])
+                else:
+                    temp = temp + str(x[i][j]) + " && "
+            
+
+        if i == (m - 1):
+           print(temp)
+        else:
+           print(temp + " \\\\")
+
+    print("\\end{pmatrix}")
+    print("")
+
 def to_array(M):
     return np.array(M)
     
 def get_dimensions(M):
     return np.shape(M)
 
-def add_bias(M):
-    m, n = np.shape(M)
-    return np.concatenate([np.ones((m,1)), M], axis = horizontal_axis)
+def concatenate(M1, M2):
+    return np.concatenate([M1, M2], axis = horizontal_axis)
 
 def multiply(M1, M2):
     return np.dot(M1, M2)
@@ -28,6 +63,14 @@ def transpose(M):
 
 def inverse(M):
     return np.linalg.inv(M)
+    
+def create_bias(M):
+    m, n = get_dimensions(M)
+    return np.ones((m,1))
+    
+def add_bias(M):
+    bias = create_bias(M)
+    return concatenate(bias, M)
 
 def calcWeightsClosedForm(X, y):
     XT = transpose(X)
