@@ -49,6 +49,10 @@ def calc_theta_closed_form(X, y):
     result = multiply(result, y)
     return result
 
+def initialize_theta(X):
+    m, n = get_dimensions(X)
+    return np.ones((n))
+    
 def calc_sum_of_squared_errors(w, X, y):
     m, n = get_dimensions(X)
     result = 0
