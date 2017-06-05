@@ -75,7 +75,7 @@ class LogisticRegression(object):
 
         # Initialisierung der Gewichte (inklusive Bias-Term)
         # self.weights in der Form [n_features + 1]
-        self.weights = calc_theta_closed_form(X, y)
+        self.weights = initialize_theta(X)
 
         # Array zum Speichern des Errors für jeden SGD-Schritt
         self.cost = []

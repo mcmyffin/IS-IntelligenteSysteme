@@ -67,6 +67,7 @@ class LinearRegression(object):
             # Berechne SSE des SGD-Schritts mit den aktuallisierten Gewichten
             self.cost = self.cost + [calc_sum_of_squared_errors(self.weights, X, y)]
 
+        latex_matrix("t", self.weights)
         return self
     
     def predict(self, X):
