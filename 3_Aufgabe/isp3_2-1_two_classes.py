@@ -33,32 +33,13 @@ plt.show()
 from logistic_regression import LogisticRegression
 
 # Training des Modells
-alphas = [0.01, 0.001, 0.0001]
-iterations = [10, 100, 1000] #, 10000]
-for _alpha in alphas:
-    for _iteration in iterations:
-        print("alpha = " + str(_alpha) + ", iterations = " + str(_iteration))
-        model = LogisticRegression()
-        model.fit(X, y, alpha=_alpha, iterations=_iteration)
-        
-        plt.plot(model.cost, 'r')
-        plt.show()
+model = LogisticRegression()
+model.fit(X, y, alpha=0.01, iterations=100)
 
-        
-"""
-alphas = [0.01, 0.001, 0.0001]
-iterations = [100, 1000, 10000]
-for _alpha in alphas:
-    for _iteration in iterations:
-        model = LogisticRegression()
-        model.fit(X, y, alpha=0.01, iterations=100)
-        
-        # Plot der Error-Kurve über das Training
-        
-"""
-    
-print("ENDE")
-    
+# Plot der Error-Kurve über das Training
+plt.plot(model.cost, 'r')
+plt.show()
+
 # Testdaten zur Visualisierung der Decision-Boundary
 xx, yy = np.mgrid[-10:10:.01, -10:10:.01]
 grid = np.c_[xx.ravel(), yy.ravel()]
