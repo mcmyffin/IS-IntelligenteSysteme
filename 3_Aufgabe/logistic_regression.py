@@ -9,8 +9,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from helper import *
 import numpy as np
-from helper import add_bias, calcWeightsClosedForm, calcPrediction, multiply, transpose
 
 # Sigmoid Funktion
 def sigmoid(x):
@@ -75,7 +75,7 @@ class LogisticRegression(object):
 
         # Initialisierung der Gewichte (inklusive Bias-Term)
         # self.weights in der Form [n_features + 1]
-        self.weights = calcWeightsClosedForm(X, y)
+        self.weights = calc_theta_closed_form(X, y)
 
         # Array zum Speichern des Errors für jeden SGD-Schritt
         self.cost = []

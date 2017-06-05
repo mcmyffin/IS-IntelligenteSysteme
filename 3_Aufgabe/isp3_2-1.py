@@ -15,6 +15,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from helper import *
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -38,6 +39,7 @@ y = data[:,2]
 def plot_dataset(number, color, color_map):
     plt.plot([X[i,0] for i in range(len(X)) if y[i] == number], [X[i,1] for i in range(len(X)) if y[i] == number], color)
 
+print("Plotting dataset...")
 for number, color, color_map in classes:
     plot_dataset(number, color, color_map)
 plt.show()
@@ -55,11 +57,13 @@ for _class in classes:
     
     
     # Plot der Error-Kurve über das Training
+    print("Plotting error for class '" + str(number) + "'...")
     plt.plot(model.cost, 'r')
     plt.show()
 
 
 # Plot der Klassifikation mit Decision-Boundary
+print("Plotting classifying...")
 f, ax = plt.subplots(figsize=(8.0 + len(classes) * 1.5, 6.0))
 
 for number, color, color_map, model in classes:

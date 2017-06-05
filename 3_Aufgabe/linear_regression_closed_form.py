@@ -9,8 +9,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import numpy as np
 from helper import *
+import numpy as np
 
 class LinearRegression(object):
     """Linear Regression Model
@@ -37,13 +37,13 @@ class LinearRegression(object):
         # damit sollte X die Form [n_samples, n_features + 1] bekommen   
         X = add_bias(X)
         
-        
         # Bestimmung der Gewichte mittels abgeschlossener Lösung
         # self.weights in der Form [n_features + 1]
-        self.weights = calcWeightsClosedForm(X, y)
+        self.weights = calc_theta_closed_form(X, y)
         
         return self
-
+        
+        
     def predict(self, X):
         """Vorhersage der Zielvariable
 
@@ -57,4 +57,4 @@ class LinearRegression(object):
         X = add_bias(X)
         
         # Berechnen der Zielvariablen über die Hypothese
-        return calcPrediction(self.weights, X)
+        return calc_hypothesis(self.weights, X)

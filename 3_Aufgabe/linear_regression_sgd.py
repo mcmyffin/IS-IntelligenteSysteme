@@ -9,22 +9,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from helper import *
 import numpy as np
-from helper import add_bias, calcWeightsClosedForm, calcPrediction
-
-# Hypothese h(x)
-def h_x(w, X):
-    return calcPrediction(w, X)
     
-# Sum of Squared Errors (SSE)
-def sse(w, X, y):
-    m, n = np.shape(X)
-    result = 0
-    for i in range(1, m):
-        result += (y[i] - h_x(w, X[i])) ** 2
-    result = result / 2
-    return result
-
 class LinearRegression(object):
     """Linear Regression Model
 
@@ -61,7 +48,7 @@ class LinearRegression(object):
 
         # Initialisierung der Gewichte (inklusive Bias-Term)
         # self.weights in der Form [n_features + 1]
-        self.weights = calcWeightsClosedForm(X, y)
+        self.weights = calc_theta_closed_form(X, y)
 
         # Array zum Speichern des Errors für jeden SGD-Schritt
         self.cost = []
@@ -74,11 +61,11 @@ class LinearRegression(object):
                 # Update der Gewichte
                 # Schleife über Parameter (n+1 durch Bias-Term)
                 for j in range(n+1):
-                    temp = y[i] - h_x(self.weights, X[i])
+                    temp = y[i] - calc_hypothesis(self.weights, X[i])
                     self.weights[j] = self.weights[j] + alpha * temp * X[i][j]
 
             # Berechne SSE des SGD-Schritts mit den aktuallisierten Gewichten
-            self.cost = self.cost + [sse(self.weights, X, y)]
+            self.cost = self.cost + [calc_sum_of_squared_errors(self.weights, X, y)]
 
         return self
     
@@ -95,4 +82,4 @@ class LinearRegression(object):
         X = add_bias(X)
         
         # Berechnen der Zielvariablen über die Hypothese
-        return h_x(self.weights, X)
+        return calc_hypothesis(self.weights, X)

@@ -15,6 +15,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from helper import *
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -34,12 +35,9 @@ plt.show()
 
 # Standartisierung der Daten
 df_norm = np.copy(df)
-
-from helper import standardize, horizontal_axis
 standardize(df["size"])
 standardize(df["rooms"])
 standardize(df["price"])
-
 df_norm = np.array(df)
 
 # Trainingsdaten und Zielvariablen definieren
