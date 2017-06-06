@@ -66,7 +66,7 @@ def standardize(data):
     standard_diviation = np.std(data)
     
     for x in range(len(data)):
-        data[x] = np.abs(data[x] - average) / standard_diviation
+        data[x] = (data[x] - average) / standard_diviation
 
 
 
