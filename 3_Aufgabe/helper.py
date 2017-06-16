@@ -62,11 +62,11 @@ def calc_sum_of_squared_errors(w, X, y):
     return result
 
 def standardize(data):
-    average = np.average(data)
+    mean = np.mean(data)
     standard_diviation = np.std(data)
     
     for x in range(len(data)):
-        data[x] = np.abs(data[x] - average) / standard_diviation
+        data[x] = (data[x] - mean) / standard_diviation
 
 
 
